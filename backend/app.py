@@ -15,7 +15,8 @@ genai.configure(api_key=API_KEY)
 MODEL_NAME = "gemini-2.0-flash"
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins":[
+ "http://localhost:5173","https://mangrove-chat-bot.vercel.app"]}})
 
 # --- Keywords for quick validation ---
 MANGROVE_KEYWORDS = [
