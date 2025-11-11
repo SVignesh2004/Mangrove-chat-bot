@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 import os
 
-# --- Setup ---
 load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
@@ -62,16 +61,7 @@ def chat():
             else:
                 reply = "🌿 Goodbye! Hope you learned something new about Mangrove forests. See you soon!"
             return jsonify({"reply": reply}), 200
-        # --- Smart detection ---
-        # if not is_mangrove_related(user_message):
-        #     return jsonify({
-        #         "reply": (
-        #             "Sorry 🌱, I can only answer questions related to 'Mangrove forests' — "
-        #             "like their flora, fauna, economic importance, tourism, and ecological benefits."
-        #         )
-        #     }), 200
 
-        # --- Improved prompt ---
         system_prompt = (
     "You are an expert and friendly assistant specialized in *Mangrove forests*. "
     "Always begin your response with facts about Mangrove forests first. "
@@ -97,7 +87,6 @@ def chat():
 
 
 
-        # Combine system + user input
         prompt = f"{system_prompt}\n\nUser: {user_message}\nAssistant:"
 
         model = genai.GenerativeModel(MODEL_NAME)
