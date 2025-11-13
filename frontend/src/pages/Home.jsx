@@ -23,6 +23,7 @@ function Home() {
 
     try {
       const res = await axios.post("https://mangrove-chat-bot.onrender.com/chat", { message: input });
+      //  const res = await axios.post("http://127.0.0.1:5000/chat", { message: input });
       const botReply = res.data.reply || "Sorry, no response from the bot.";
       setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
     } catch (err) {
