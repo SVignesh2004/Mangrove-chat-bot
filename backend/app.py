@@ -19,7 +19,10 @@ CORS(app, resources={r"/*": {"origins": [
     "http://localhost:5173", "https://mangrove-chat-bot.vercel.app"
 ]}})
 
-
+@app.route("/", methods=["GET"])
+def health_check():
+    return jsonify({"status": "ok"}), 200
+ 
 def generate_reply(system_prompt, user_message, api_key):
     """Generate model reply safely using the correct Gemini format."""
     genai.configure(api_key=api_key)

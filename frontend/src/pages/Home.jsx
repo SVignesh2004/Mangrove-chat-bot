@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import home from "../assets/home.jpg";
 
 function Home() {
+   useEffect(() => {
+    const keepAlive = () => {
+      axios.get("https://mangrove-chat-bot.onrender.com/")
+        .then(() => console.log(" Backend kept alive"))
+        .catch((err) => console.error(" Keep-alive failed:", err));
+    };
+
+    // Run immediately on load
+    keepAlive();
+    // Then repeat every 5 minutes
+    const interval = setInterval(keepAlive, 5 * 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   const [messages, setMessages] = useState([
     {
       sender: "bot",
